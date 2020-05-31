@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="form">
+    <div class="container">
+        <form action="/search" method="POST" class="form-inline">
+            <label for="Input the stock code">Choose the country: </label>
+            <select name="country">
+                <option value="JAPAN">JAPAN</option>
+                <option value="TAIWAN">TAIWAN</option>
+                <option value="US">US</option>
+            </select>
+            <br>
+            <br>
+            <input type="text" class="stock-codes" name="code_1" placeholder="Code" maxlength="8">
+            <br>
+            <br>
+            <input type="text" class="stock-codes" name="code_2" placeholder="Code" maxlength="8">
+            <br>
+            <br>
+            <button type="submit" class="default-button">
+                submit
+            </button>
+        </form>
+        <p class="result">
+            {% if code %}
+            Country : {{country}}
+            <br>
+            The results as below :
+            <br>
+            <table id="table" align="center" border="1px">
+                <thead>
+                    {% for column in columns%}
+                    <th>{{column}}</th>
+                    {% endfor %}
+                </thead>
+                <tbody>
+                    <meta charset="UTF-8">
+                    {% for i in data %}
+                    <tr>
+                        {% for v in i %}
+                        <td>{{ v }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+            Enter the codes and submit
+
+            {% endif %}
+        </p>
+    </div>
+</div>
+{% endblock %}
