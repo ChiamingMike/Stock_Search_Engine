@@ -15,7 +15,7 @@ from engine_factory.logger.Log import log
 
 class DefaultCodeContainer(object):
 
-    def __init__(self, file_name: str, country: str) -> None:
+    def __init__(self, country: str) -> None:
         """
         """
         try:
@@ -31,12 +31,6 @@ class DefaultCodeContainer(object):
             log.w(e)
             log.w('Failed to get the information from setting.ini .')
             log.w('')
-            return None
-
-        execution_date = datetime.datetime.now().strftime('%Y%m')
-        self.file_name = f'{execution_date}_{file_name}'
-        self.file_path = os.path.join(os.path.dirname(os.path.dirname(
-            os.path.dirname(__file__))), 'asset', self.file_name)
 
         return None
 

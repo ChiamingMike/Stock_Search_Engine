@@ -38,8 +38,8 @@ def search():
         data = [['v1', 'v2', 'N/A', 'v4']]
 
         try:
-            country = 'JAPAN'
-            target_code = ['1605']
+            country = 'US'
+            target_code = ['AAPL', 'BRK-B', 'test123']
 
             obj = IniCreater(country)
             obj.create_ini_file(target_code)
@@ -66,5 +66,8 @@ def search():
 
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    # app.debug = True
+    # app.run()
+    country = 'US'
+    engine_switch = EngineSwitch()
+    engine_switch.switching_engine_to(country)

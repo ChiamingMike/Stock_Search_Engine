@@ -24,6 +24,10 @@ class UrlsDefinition:
         'url': 'https://www.jpx.co.jp/english/markets/statistics-equities/misc/01.html'
     }
 
+    yahoo_us_finance = {
+        'url': 'https://query1.finance.yahoo.com/v7/finance/download/{symbol}?period1={now_time_unix}&period2={now_time_unix}&interval=1{period}&events=history'
+    }
+
 
 class PeriodDefinition:
     period = {

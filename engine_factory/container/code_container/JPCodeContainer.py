@@ -4,6 +4,7 @@ Created on 2020/03/06
 @author: ChiamingMike
 '''
 
+import datetime
 import os
 import pandas
 import re
@@ -41,7 +42,12 @@ class JPCodeContainer(DefaultCodeContainer):
 
         self.stock_codes = list()
         file_name = 'JP_stock_list.xls'
-        super().__init__(file_name, country=self.JAPAN)
+        super().__init__(country=self.JAPAN)
+
+        execution_date = datetime.datetime.now().strftime('%Y%m')
+        self.file_name = f'{execution_date}_{file_name}'
+        self.file_path = os.path.join(os.path.dirname(os.path.dirname(
+            os.path.dirname(__file__))), 'asset', self.file_name)
 
         self.conversion_table = pandas.Series()
 

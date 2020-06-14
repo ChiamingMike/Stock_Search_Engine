@@ -6,6 +6,7 @@ Created on 2020/05/30
 
 from engine_factory.logger.Log import log
 from engine_factory.engine.JPEngine import JPEngine
+from engine_factory.engine.USEngine import USEngine
 
 
 class EngineSwitch(object):
@@ -37,6 +38,8 @@ class EngineSwitch(object):
         elif country == self.US:
             log.i('Switching country to US...')
             log.i('')
+
+            jp_engine = USEngine()
 
         else:
             log.i('Unexcepted country.')
