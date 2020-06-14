@@ -10,7 +10,6 @@ import pandas
 import re
 import requests
 
-from dateutil.relativedelta import relativedelta
 from bs4 import BeautifulSoup
 from urllib import request
 
@@ -44,29 +43,30 @@ class USCodeContainer(DefaultCodeContainer):
 
         self.__is_intialized is True
 
-        self.symbols_list = list()
         super().__init__(country=self.US)
         # self.stock_codes = ['BRK-B', 'AAPL', 'test123']
 
         self.register_stock_codes(self.stock_codes)
-        self.stock_codes.clear()
 
         return None
 
-    def register_stock_codes(self, symbols_list) -> None:
+    def register_stock_codes(self, symbols) -> None:
         """
         """
-        self.symbols_list = [
-            symbol for symbol in symbols_list if self.__is_valid(symbol)]
+        symbols_list = [
+            symbol for symbol in symbols if self.__is_valid(symbol)]
 
-        if self.symbols_list == list():
+        if symbols_list == list():
             log.e('Valid symbol doesn\'t exist.')
             log.e('')
             return None
         else:
-            log.i(f'Found {len(self.symbols_list)} valid codes.')
-            log.i('SYMBOLS: {sym}'.format(sym=', '.join(self.symbols_list)))
+            log.i(f'Found {len(symbols_list)} valid codes.')
+            log.i('SYMBOLS: {sym}'.format(sym=', '.join(symbols_list)))
             log.i('')
+
+        self.stock_codes.clear()
+        self.stock_codes = symbols_list
 
         return None
 
@@ -96,7 +96,8 @@ class USCodeContainer(DefaultCodeContainer):
         now_time_unix = str(datetime.datetime.now().timestamp()).split('.')[0]
         try:
             url = url_format.format(symbol=symbol,
-                                    now_time_unix=now_time_unix,
+                                    form_time_unix=now_time_unix,
+                                    to_time_unix=now_time_unix,
                                     period='wk')
             is_valid = True if requests.get(url).status_code == 200 else False
 

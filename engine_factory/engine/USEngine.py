@@ -5,6 +5,7 @@ Created on 2020/06/06
 '''
 
 from engine_factory.container.code_container.USCodeContainer import USCodeContainer
+from engine_factory.container.code_container.USUrlContainer import USUrlContainer
 from engine_factory.engine.DefaultEngine import DefaultEngine
 from engine_factory.logger.Log import log
 from engine_factory.processor.Processor import AverageDataProcessor
@@ -16,7 +17,7 @@ class USEngine(DefaultEngine):
         """
         """
         self.code_container = USCodeContainer()
-        # self.url_container = USUrlContainer()
+        self.url_container = USUrlContainer()
         # self.data_container = USDataContainer()
 
         # self.stock_codes = self.code_container.get_stock_codes()

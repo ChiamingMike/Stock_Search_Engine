@@ -9,7 +9,6 @@ import os
 
 from urllib import request
 
-from engine_factory.constant.Definition import PeriodDefinition
 from engine_factory.logger.Log import log
 
 
@@ -25,7 +24,7 @@ class DefaultUrlContainer(object):
             config.read(root)
             section = country
             self.term = config.get(section, 'period')
-            self.period = PeriodDefinition.period.get(self.term, None)
+
         except Exception as e:
             log.w(e)
             log.w('Failed to get the information from setting.ini .')

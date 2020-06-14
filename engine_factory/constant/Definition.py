@@ -25,14 +25,20 @@ class UrlsDefinition:
     }
 
     yahoo_us_finance = {
-        'url': 'https://query1.finance.yahoo.com/v7/finance/download/{symbol}?period1={now_time_unix}&period2={now_time_unix}&interval=1{period}&events=history'
+        'url': 'https://query1.finance.yahoo.com/v7/finance/download/{symbol}?period1={from_time_unix}&period2={to_time_unix}&interval=1{period}&events=history'
     }
 
 
 class PeriodDefinition:
-    period = {
+    period_jp = {
         'daily': 'day',
         'weekly': 'wek',
         'monthly': 'mon',
         'yearly': 'yar'
+    }
+
+    period_us = {
+        'daily': 'd',
+        'weekly': 'wk',
+        'monthly': 'mo',
     }

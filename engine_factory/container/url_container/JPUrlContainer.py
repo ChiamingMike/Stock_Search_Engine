@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 from urllib import request
 
 from engine_factory.constant.Definition import UrlsDefinition
+from engine_factory.constant.Definition import PeriodDefinition
 from engine_factory.container.url_container.DefaultUrlContainer import DefaultUrlContainer
 from engine_factory.container.code_container.JPCodeContainer import JPCodeContainer
 from engine_factory.logger.Log import log
@@ -36,6 +37,7 @@ class JPUrlContainer(DefaultUrlContainer):
         self.term = str()
         self.period = str()
         super().__init__(country=self.JAPAN)
+        self.period = PeriodDefinition.period_jp.get(self.term, None)
 
         self.code_container = JPCodeContainer()
         self.create_initial_url()
