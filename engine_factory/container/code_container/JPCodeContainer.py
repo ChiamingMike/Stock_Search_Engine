@@ -47,7 +47,7 @@ class JPCodeContainer(DefaultCodeContainer):
         execution_date = datetime.datetime.now().strftime('%Y%m')
         self.file_name = f'{execution_date}_{file_name}'
         self.file_path = os.path.join(os.path.dirname(os.path.dirname(
-            os.path.dirname(__file__))), 'asset', self.file_name)
+            os.path.dirname(__file__))), 'asset', 'JP', self.file_name)
 
         self.conversion_table = pandas.Series()
 

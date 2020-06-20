@@ -10,6 +10,8 @@ class DefaultEngine(object):
     def __init__(self) -> None:
         """
         """
+        self.class_name = self.__class__.__name__
+
         return None
 
     def accumulate_urls(self) -> None:

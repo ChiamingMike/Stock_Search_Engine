@@ -9,17 +9,17 @@ import datetime
 
 from engine_factory.constant.Definition import ColumnsDefinition
 from engine_factory.container.data_container.JPDataContainer import JPDataContainer
+from engine_factory.container.data_container.USDataContainer import USDataContainer
 from engine_factory.logger.Log import log
 
 
 class DataProcessor(object):
 
-    def __init__(self, term, stock_name, stock_code) -> None:
+    def __init__(self, country, term, stock_name, stock_code) -> None:
         """
         """
         execution_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-        self.data_container = JPDataContainer()
+        self.data_container = eval(f'{country}DataContainer')()
 
         self.term = term
         self.date = execution_date
@@ -41,7 +41,7 @@ class DataProcessor(object):
 
 class AverageDataProcessor(DataProcessor):
 
-    def __init__(self, term, stock_name, stock_code) -> None:
+    def __init__(self, class_name, term, stock_name, stock_code) -> None:
         """
         """
         self.length = int()
@@ -51,7 +51,8 @@ class AverageDataProcessor(DataProcessor):
         self.high = str()
         self.low = str()
         self.close = str()
-        super().__init__(term, stock_name, stock_code)
+        self.country = class_name.rstrip('Engine')
+        super().__init__(self.country, term, stock_name, stock_code)
 
         self.set_target_data()
 
@@ -67,18 +68,23 @@ class AverageDataProcessor(DataProcessor):
             log.e('')
             return None
 
+        if self.country == 'JP':
+            column_dict = ColumnsDefinition.columns_jp
+        elif self.country == 'US':
+            column_dict = ColumnsDefinition.columns_us
+
         try:
             self.length = len(accumulative_data)
-            self.start = accumulative_data.iloc[-1][ColumnsDefinition.DATE]
-            self.end = accumulative_data.iloc[0][ColumnsDefinition.DATE]
+            self.start = accumulative_data.iloc[-1][column_dict.get('DATE')]
+            self.end = accumulative_data.iloc[0][column_dict.get('DATE')]
             self.open = sum(
-                accumulative_data.loc[:, ColumnsDefinition.OPENING_PRICE])
+                accumulative_data.loc[:, column_dict.get('OPENING_PRICE')])
             self.high = sum(
-                accumulative_data.loc[:, ColumnsDefinition.HIGH_PRICE])
+                accumulative_data.loc[:, column_dict.get('HIGH_PRICE')])
             self.low = sum(
-                accumulative_data.loc[:, ColumnsDefinition.LOW_PRICE])
+                accumulative_data.loc[:, column_dict.get('LOW_PRICE')])
             self.close = sum(
-                accumulative_data.loc[:, ColumnsDefinition.CLOSING_PRICE])
+                accumulative_data.loc[:, column_dict.get('CLOSING_PRICE')])
         except Exception as e:
             log.e(e)
             log.e('Failed to prepare calculation with accumulative data.')

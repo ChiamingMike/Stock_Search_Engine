@@ -41,7 +41,7 @@ class USCodeContainer(DefaultCodeContainer):
         if self.__is_intialized is True:
             return None
 
-        self.__is_intialized is True
+        self.__is_intialized = True
 
         super().__init__(country=self.US)
         # self.stock_codes = ['BRK-B', 'AAPL', 'test123']
@@ -61,7 +61,7 @@ class USCodeContainer(DefaultCodeContainer):
             log.e('')
             return None
         else:
-            log.i(f'Found {len(symbols_list)} valid codes.')
+            log.i(f'Found {len(symbols_list)} valid symbols.')
             log.i('SYMBOLS: {sym}'.format(sym=', '.join(symbols_list)))
             log.i('')
 
@@ -96,7 +96,7 @@ class USCodeContainer(DefaultCodeContainer):
         now_time_unix = str(datetime.datetime.now().timestamp()).split('.')[0]
         try:
             url = url_format.format(symbol=symbol,
-                                    form_time_unix=now_time_unix,
+                                    from_time_unix=now_time_unix,
                                     to_time_unix=now_time_unix,
                                     period='wk')
             is_valid = True if requests.get(url).status_code == 200 else False
@@ -107,29 +107,6 @@ class USCodeContainer(DefaultCodeContainer):
             log.e(e)
 
         return is_valid
-
-    # def dl_data(self, symbol: str) -> bool:
-    #     """
-    #     """
-    #     is_valid = bool()
-
-    #     to_time = datetime.datetime.now()
-    #     from_time = to_time + relativedelta(years=-5)
-    #     to_time_unix = str(to_time.timestamp()).split('.')[0]
-    #     from_time_unix = str(from_time.timestamp()).split('.')[0]
-
-    #     path = os.path.join(os.path.dirname(__file__), 'tst.csv')
-    #     url = f'https://query1.finance.yahoo.com/v7/finance/download/{symbol}?period1={from_time_unix}&period2={to_time_unix}&interval=1d&events=history'
-    #     try:
-    #         request.urlretrieve(url, path)
-    #         is_valid = True
-    #         print('valid:', symbol)
-
-    #     except Exception as e:
-    #         print('Invalid symbol:', symbol)
-    #         print(e)
-
-    #     return is_valid
 
 
 if __name__ == '__main__':

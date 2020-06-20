@@ -17,6 +17,7 @@ class JPEngine(DefaultEngine):
     def __init__(self) -> None:
         """
         """
+        super().__init__()
         self.code_container = JPCodeContainer()
         self.url_container = JPUrlContainer()
         self.data_container = JPDataContainer()
@@ -49,7 +50,8 @@ class JPEngine(DefaultEngine):
         """
         for stock_code in self.stock_codes:
             stock_name = self.code_container.convert_into_name(stock_code)
-            average_data_processor = AverageDataProcessor(self.term,
+            average_data_processor = AverageDataProcessor(self.class_name,
+                                                          self.term,
                                                           stock_name,
                                                           stock_code)
             average_data_processor.calculate_data()

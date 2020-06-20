@@ -39,7 +39,8 @@ class EngineSwitch(object):
             log.i('Switching country to US...')
             log.i('')
 
-            jp_engine = USEngine()
+            us_engine = USEngine()
+            us_engine.calcualte_data()
 
         else:
             log.i('Unexcepted country.')

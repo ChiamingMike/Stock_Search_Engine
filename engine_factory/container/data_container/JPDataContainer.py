@@ -54,7 +54,7 @@ class JPDataContainer(DefaultDataContainer):
                 continue
             else:
                 self.data_table[stock_code] = pandas.concat(
-                    target_data, axis=0).sort_values(ColumnsDefinition.DATE,
+                    target_data, axis=0).sort_values(ColumnsDefinition.columns_jp.get('DATE'),
                                                      ascending=False)
                 log.i(f'Accumulated data with URLs related to {stock_code}.')
                 log.i('')
