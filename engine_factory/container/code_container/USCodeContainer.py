@@ -1,17 +1,11 @@
 '''
-Created on 2020/03/06
+Created on 2020/06/20
 
 @author: ChiamingMike
 '''
 
 import datetime
-import os
-import pandas
-import re
 import requests
-
-from bs4 import BeautifulSoup
-from urllib import request
 
 from engine_factory.constant.Definition import UrlsDefinition
 from engine_factory.container.code_container.DefaultCodeContainer import DefaultCodeContainer

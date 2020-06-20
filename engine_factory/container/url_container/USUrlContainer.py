@@ -5,16 +5,13 @@ Created on 2020/03/06
 '''
 
 import datetime
-import time
 
-from bs4 import BeautifulSoup
 from dateutil.relativedelta import relativedelta
-from urllib import request
 
 from engine_factory.constant.Definition import UrlsDefinition
 from engine_factory.constant.Definition import PeriodDefinition
-from engine_factory.container.url_container.DefaultUrlContainer import DefaultUrlContainer
 from engine_factory.container.code_container.USCodeContainer import USCodeContainer
+from engine_factory.container.url_container.DefaultUrlContainer import DefaultUrlContainer
 from engine_factory.logger.Log import log
 
 
